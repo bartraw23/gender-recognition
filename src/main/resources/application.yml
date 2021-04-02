@@ -1,1 +1,2 @@
-
+pathToFemaleTokens: src/main/resources/FemaleListClean.csv
+pathToMaleTokens: src/main/resources/MaleListClean.csv
