@@ -4,9 +4,11 @@ import io.genderrecognition.model.Gender;
 import io.genderrecognition.model.IdentifiedName;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 public interface IdentifiedNameRepository extends CrudRepository<IdentifiedName, Long> {
 
-    Gender findByName(String name);
+    Optional<Gender> findByName(String name);
 }
 
 
