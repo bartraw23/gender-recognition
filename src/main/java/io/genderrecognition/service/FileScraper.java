@@ -14,16 +14,25 @@ public class FileScraper {
 
     public Gender returnGender(String name) {
         Gender gender;
+
         if (name.toUpperCase().endsWith("A")) {
-            gender = checkGender(name, Gender.FEMALE) ? Gender.FEMALE : Gender.UNDEFINED;
+            if (isGender(name, Gender.FEMALE)) {
+                gender = Gender.FEMALE;
+            } else {
+                gender = isGender(name, Gender.MALE) ? Gender.MALE : Gender.UNDEFINED;
+            }
         } else {
-            gender = checkGender(name, Gender.MALE) ? Gender.MALE : Gender.UNDEFINED;
+            if (isGender(name, Gender.MALE)) {
+                gender = Gender.MALE;
+            } else {
+                gender = isGender(name, Gender.FEMALE) ? Gender.FEMALE : Gender.UNDEFINED;
+            }
         }
+
         return gender;
     }
 
-    private boolean checkGender(String name, Gender gender) {
-        boolean result = false;
+    private boolean isGender(String name, Gender gender) {
         String filePath;
 
         if (gender == Gender.FEMALE) {
@@ -32,20 +41,17 @@ public class FileScraper {
             filePath = malePath;
         }
 
-        try {
-            Scanner sc = new Scanner(new File(filePath));
+        try (Scanner sc = new Scanner(new File(filePath));) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                if (line.toUpperCase().equals(name)) {
-                    result = true;
-                    break;
+                if (line.equalsIgnoreCase(name)) {
+                    return true;
                 }
             }
-            sc.close();
         } catch (FileNotFoundException ex) {
 
         }
 
-        return result;
+        return false;
     }
 }
