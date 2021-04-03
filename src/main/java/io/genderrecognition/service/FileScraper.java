@@ -1,6 +1,8 @@
 package io.genderrecognition.service;
 
 import io.genderrecognition.model.Gender;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -9,8 +11,8 @@ import java.util.Scanner;
 
 @Service
 public class FileScraper {
-    private static String malePath = System.getProperty("pathToMaleTokens");
-    private static String femalePath = System.getProperty("pathToFemaleTokens");
+    @Autowired
+    private Environment env;
 
     public Gender returnGender(String name) {
         Gender gender;
