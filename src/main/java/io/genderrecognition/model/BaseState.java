@@ -26,7 +26,7 @@ public class BaseState {
         this.gender = gender;
     }
 
-    public Boolean getUploaded() {
+    public Boolean isUploaded() {
         return uploaded;
     }
 
