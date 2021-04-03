@@ -1,13 +1,16 @@
 package io.genderrecognition.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class IdentifiedName {
+    @Id
     private String name;
+
+    @Column
     private Gender gender;
-    private Long id;
 
     public IdentifiedName(String name, Gender gender) {
         this.name = name;
@@ -16,15 +19,6 @@ public class IdentifiedName {
 
     public IdentifiedName() {
 
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
