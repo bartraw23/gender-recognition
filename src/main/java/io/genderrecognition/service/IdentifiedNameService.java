@@ -20,6 +20,6 @@ public class IdentifiedNameService {
 
     @Transactional
     public Gender findByName(String name) {
-        return identifiedNameRepository.findByName(name);
+        return identifiedNameRepository.findByName(name).orElse(Gender.UNDEFINED);
     }
 }
