@@ -14,7 +14,7 @@ public class RecognizeGenderService {
 
     public Gender getGender(String name) {
         Gender gender = identifiedNameService.findByName(name);
-        if (gender == (Gender.UNDEFINED)) {
+        if (gender == (Gender.INCONCLUSIVE)) {
             return fileScraper.returnGender(name);
         }
         return gender;

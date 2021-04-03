@@ -21,13 +21,13 @@ public class FileScraper {
             if (isGender(name, Gender.FEMALE)) {
                 gender = Gender.FEMALE;
             } else {
-                gender = isGender(name, Gender.MALE) ? Gender.MALE : Gender.UNDEFINED;
+                gender = isGender(name, Gender.MALE) ? Gender.MALE : Gender.INCONCLUSIVE;
             }
         } else {
             if (isGender(name, Gender.MALE)) {
                 gender = Gender.MALE;
             } else {
-                gender = isGender(name, Gender.FEMALE) ? Gender.FEMALE : Gender.UNDEFINED;
+                gender = isGender(name, Gender.FEMALE) ? Gender.FEMALE : Gender.INCONCLUSIVE;
             }
         }
 
