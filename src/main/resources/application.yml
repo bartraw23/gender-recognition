@@ -1,2 +1,13 @@
 pathToFemaleTokens: src/main/resources/FemaleListClean.csv
 pathToMaleTokens: src/main/resources/MaleListClean.csv
+spring:
+  jpa:
+    database: postgresql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Pass2021!
