@@ -31,7 +31,7 @@ public class RecognizeGenderService {
     private Gender getGenderForName(String name) {
         Gender gender = identifiedNameService.findByName(name);
         if (gender == (Gender.INCONCLUSIVE)) {
-            return fileScraper.returnGender(name);
+            return fileScraper.getGender(name);
         }
         return gender;
     }
