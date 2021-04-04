@@ -1,15 +1,12 @@
 package io.genderrecognition.controller;
 
-import io.genderrecognition.model.Gender;
+import io.genderrecognition.pojo.PersonRecognitionResult;
 import io.genderrecognition.service.RecognizeGenderService;
 import io.genderrecognition.service.TokensService;
 import io.genderrecognition.wrapper.PersonWrapper;
 import io.genderrecognition.wrapper.Tokens;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -21,9 +18,10 @@ public class RecognitionController {
     @Autowired
     private TokensService tokensService;
 
-    @GetMapping("/name")
-    public Gender checkGender(@RequestBody PersonWrapper personWrapper) {
-        return recognizeGenderService.recognizeGender(personWrapper.getName(), personWrapper.getByAllTokens());
+    @PostMapping("/name")
+    public PersonRecognitionResult checkGender(@RequestBody PersonWrapper personWrapper) {
+        String name = personWrapper.getName();
+        return new PersonRecognitionResult(name, recognizeGenderService.recognizeGender(name, personWrapper.getByAllTokens()));
     }
 
     @GetMapping("/tokens")
