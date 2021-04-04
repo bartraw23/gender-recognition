@@ -19,6 +19,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jersey'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.2.0'
     testImplementation 'io.rest-assured:json-path:4.2.0'
+    testImplementation 'io.rest-assured:xml-path:4.2.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
