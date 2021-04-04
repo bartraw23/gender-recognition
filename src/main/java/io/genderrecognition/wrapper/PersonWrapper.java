@@ -4,6 +4,11 @@ public class PersonWrapper {
     private String name;
     private Boolean byAllTokens;
 
+    public PersonWrapper(String name, Boolean byAllTokens) {
+        this.name = name;
+        this.byAllTokens = byAllTokens;
+    }
+
     public String getName() {
         return name;
     }
