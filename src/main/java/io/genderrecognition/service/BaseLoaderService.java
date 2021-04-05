@@ -4,6 +4,7 @@ import io.genderrecognition.model.BaseState;
 import io.genderrecognition.model.Gender;
 import io.genderrecognition.model.IdentifiedName;
 import io.genderrecognition.repository.BaseStateRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
@@ -19,37 +20,35 @@ public class BaseLoaderService {
     private Environment env;
 
     @Autowired
-    IdentifiedNameService identifiedNameService;
+    private IdentifiedNameService identifiedNameService;
 
     @Autowired
-    BaseStateRepository baseStateRepository;
+    private BaseStateRepository baseStateRepository;
+
+    private static Logger logger = Logger.getLogger(BaseLoaderService.class.getName());
 
     @Async
-    public void loadNames() {
-        String malePath = env.getProperty("pathToMaleTokens");
+    public void execute() {
+        loadNames("pathToMaleTokens", Gender.MALE);
+        loadNames("pathToFemaleTokens", Gender.FEMALE);
+    }
 
-        try (Scanner sc = new Scanner(new File(malePath));) {
+    private void loadNames(String pathToFemaleTokens, Gender female) {
+        String femalePath = env.getProperty(pathToFemaleTokens);
+        loadFromFileToDb(femalePath, female);
+        baseStateRepository.save(new BaseState(female, true));
+    }
+
+    private void loadFromFileToDb(String femalePath, Gender gender) {
+        try (Scanner sc = new Scanner(new File(femalePath));) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                IdentifiedName identifiedName = new IdentifiedName(line, Gender.MALE);
+                IdentifiedName identifiedName = new IdentifiedName(line, gender);
                 identifiedNameService.addIdentifiedName(identifiedName);
             }
         } catch (FileNotFoundException ex) {
             baseStateRepository.save(new BaseState(Gender.MALE, false));
+            logger.error(ex.getMessage());
         }
-        baseStateRepository.save(new BaseState(Gender.MALE, true));
-
-        String femalePath = env.getProperty("pathToFemaleTokens");
-
-        try (Scanner sc = new Scanner(new File(femalePath));) {
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                IdentifiedName identifiedName = new IdentifiedName(line, Gender.FEMALE);
-                identifiedNameService.addIdentifiedName(identifiedName);
-            }
-        } catch (FileNotFoundException ex) {
-        }
-
-        baseStateRepository.save(new BaseState(Gender.FEMALE, true));
     }
 }
