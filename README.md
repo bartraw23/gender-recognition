@@ -24,12 +24,14 @@ Application designed for gender recognition of names.
 
 * return JSON with Tokens:
 
-        {"maleTokens": [
+        {
+          "maleTokens": [
                           ...
-        ],
-        "femaleTokens": [
+                        ],
+          "femaleTokens": [
                           ...
-        ]}
+                        ]
+        }
     
         
 
