@@ -13,4 +13,4 @@ spring:
     password: Pass2021!
 
 server:
-  port: 8090
+  port: 8080
