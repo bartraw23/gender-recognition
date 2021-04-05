@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - spring.datasource.hikari.connectionTimeout=30000
+      - spring.datasource.hikari.maxLifetime=300000
+
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Pass2021!
+    ports:
+      - 5432:5432
