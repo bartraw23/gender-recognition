@@ -38,7 +38,6 @@ public class RecognizeGenderServiceTest {
         recognitionTest("Maria Paweł Andrzej Sławek Marcin Xiwei", false, Gender.FEMALE);
     }
 
-
     @Test
     void allTokensFemaleCheck() {
         recognitionTest("Jan Maria Elżbieta Agnieszka Rokita", true, Gender.FEMALE);

@@ -2,9 +2,7 @@ package io.genderrecognition.controller;
 
 import io.genderrecognition.model.Gender;
 import io.genderrecognition.wrapper.Tokens;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,11 +12,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RecognitionControllerEndpointsTest {
-
-    @BeforeAll
-    public static void setup() {
-        RestAssured.baseURI = "http://localhost:8090";
-    }
 
     @Test
     public void tokensEndpointTest() {
