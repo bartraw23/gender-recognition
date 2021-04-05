@@ -22,6 +22,6 @@ public class InitializingDatabaseService implements InitializingBean {
     public void afterPropertiesSet() {
         baseStateRepository.save(new BaseState(Gender.FEMALE, false));
         baseStateRepository.save(new BaseState(Gender.MALE, false));
-        baseLoaderService.loadNames();
+        baseLoaderService.execute();
     }
 }
