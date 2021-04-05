@@ -3,7 +3,6 @@ package io.genderrecognition.controller;
 import io.genderrecognition.model.Gender;
 import io.genderrecognition.wrapper.Tokens;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class RecognitionControllerEndpointsTest {
     }
 
     @Test
-    public void tokensEndpointTest(){
+    public void tokensEndpointTest() {
         //GIVEN
         String path = "/tokens";
         List<String> maleTokens = Arrays.asList("PIOTR", "KRZYSZTOF", "ANDRZEJ", "TOMASZ", "PAWEŁ", "JAN", "MICHAŁ", "MARCIN", "JAKUB", "ADAM");
@@ -39,7 +38,7 @@ public class RecognitionControllerEndpointsTest {
 
         List<String> maleTokensResponse = response.jsonPath().getObject("maleTokens", List.class);
         List<String> femaleTokensResponse = response.jsonPath().getObject("femaleTokens", List.class);
-        Tokens tokens = new Tokens(maleTokensResponse,femaleTokensResponse);
+        Tokens tokens = new Tokens(maleTokensResponse, femaleTokensResponse);
 
         //THEN
         assertThat(response.statusCode()).isEqualTo(200);
